@@ -1,0 +1,18 @@
+@import './tailwind.css';
+
+/* Ensure links don't inherit default browser styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Dark theme for form elements */
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+select option {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
