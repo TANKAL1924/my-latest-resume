@@ -3,21 +3,20 @@ import AppImage from "../components/ui/AppImage";
 import { usePortfolioStore } from "../lib/store";
 import { getTechnicalSkills } from "../lib/technical";
 import type { TechnicalPublic } from "../lib/technical";
-
-
-const tools = [
-{ name: "React", level: 98 },
-{ name: "TypeScript", level: 94 },
-{ name: "Next.js", level: 96 },
-{ name: "GSAP", level: 90 },
-{ name: "Node.js", level: 85 },
-{ name: "Three.js", level: 78 }];
-
+import { supabase } from "../lib/supabase";
 
 export default function AboutSection() {
   const profile = usePortfolioStore((state) => state.profile);
   const userId = usePortfolioStore((state) => state.userId);
   const [technicalSkills, setTechnicalSkills] = useState<TechnicalPublic[]>([]);
+  const [picUrl, setPicUrl] = useState<string>("");
+
+  useEffect(() => {
+    const { data } = supabase.storage
+      .from("work_pic")
+      .getPublicUrl("izzat.jpg");
+    if (data?.publicUrl) setPicUrl(data.publicUrl);
+  }, []);
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
@@ -171,8 +170,8 @@ export default function AboutSection() {
                 style={{ aspectRatio: "4/3", background: "#1A1A1A" }}>
                 
                 <AppImage
-                  src="https://img.rocket.new/generatedImages/rocket_gen_img_1e7e43892-1772434273323.png"
-                  alt="Marcus Chen, Senior Frontend Engineer, confident smile, studio lighting, dark background"
+                  src={picUrl}
+                  alt={`${profile?.fullname ?? ""}, profile photo`}
                   className="w-full h-full object-cover" />
                 
                 <div
@@ -198,40 +197,6 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Skill bars */}
-            <div ref={barsRef} className="glass-card rounded-2xl p-6 space-y-4">
-              <p
-                className="text-xs font-bold tracking-widest uppercase mb-5"
-                style={{ color: "#4A4745" }}>
-                
-                Core proficiency
-              </p>
-              {tools?.map((tool) =>
-              <div key={tool?.name} className="space-y-1.5">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium" style={{ color: "#8A8580" }}>
-                      {tool?.name}
-                    </span>
-                    <span className="text-xs font-bold" style={{ color: "#F5A623" }}>
-                      {tool?.level}%
-                    </span>
-                  </div>
-                  <div
-                  className="h-1 rounded-full overflow-hidden"
-                  style={{ background: "rgba(240,237,232,0.06)" }}>
-                  
-                    <div
-                    className="skill-bar-fill h-full rounded-full"
-                    data-width={tool?.level}
-                    style={{
-                      width: 0,
-                      background: "linear-gradient(90deg, #F5A623, #F7C26B)"
-                    }} />
-                  
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>

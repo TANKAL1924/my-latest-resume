@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { supabase } from "../lib/supabase";
 
 export default function HeroSection() {
+  const [resumeUrl, setResumeUrl] = useState<string>("");
   const heroRef = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -13,6 +14,13 @@ export default function HeroSection() {
   const blob1Ref = useRef<HTMLDivElement>(null);
   const blob2Ref = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const { data } = supabase.storage
+      .from("resume")
+      .getPublicUrl("Izzat Hafizuddin(Resume).pdf");
+    if (data?.publicUrl) setResumeUrl(data.publicUrl);
+  }, []);
 
   useEffect(() => {
     let gsap: typeof import("gsap").gsap;
@@ -25,11 +33,13 @@ export default function HeroSection() {
       const tl = gsap.timeline({ delay: 0.2 });
 
       // Animate badge
-      tl.fromTo(
-        badgeRef.current,
-        { opacity: 0, y: 20, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
-      );
+      if (badgeRef.current) {
+        tl.fromTo(
+          badgeRef.current,
+          { opacity: 0, y: 20, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
+        );
+      }
 
       // Animate headline words
       const wordInners = headlineRef.current?.querySelectorAll(".hero-word-inner");
@@ -47,36 +57,45 @@ export default function HeroSection() {
       }
 
       // Animate subtext
-      tl.fromTo(
-        subRef.current,
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 1, ease: "expo.out" },
-        "-=0.8"
-      );
+      if (subRef.current) {
+        tl.fromTo(
+          subRef.current,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 1, ease: "expo.out" },
+          "-=0.8"
+        );
+      }
 
       // Animate CTA
-      tl.fromTo(
-        ctaRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" },
-        "-=0.6"
-      );
+      if (ctaRef.current) {
+        tl.fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" },
+          "-=0.6"
+        );
+      }
 
       // Animate stats
-      tl.fromTo(
-        statsRef.current?.children ? Array.from(statsRef.current.children) : [],
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.1 },
-        "-=0.4"
-      );
+      const statChildren = statsRef.current ? Array.from(statsRef.current.children) : [];
+      if (statChildren.length > 0) {
+        tl.fromTo(
+          statChildren,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.1 },
+          "-=0.4"
+        );
+      }
 
       // Animate scroll indicator
-      tl.fromTo(
-        scrollRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 1 },
-        "-=0.3"
-      );
+      if (scrollRef.current) {
+        tl.fromTo(
+          scrollRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 1 },
+          "-=0.3"
+        );
+      }
 
       // Parallax blobs on mouse
       const hero = heroRef.current;
@@ -213,37 +232,14 @@ export default function HeroSection() {
           className="flex flex-wrap items-center gap-4 mb-20"
           style={{ opacity: 0 }}
         >
-          <a href="#work" className="btn-primary">
-            View my work
+          <a href={resumeUrl} download="Izzat Hafizuddin(Resume).pdf" target="_blank" rel="noreferrer" className="btn-primary">
+            Download Resume
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-          </a>
-          <a href="#contact" className="btn-secondary">
-            Let's talk
           </a>
         </div>
 
-        {/* Stats */}
-        <div
-          ref={statsRef}
-          className="flex flex-wrap gap-10 pt-8"
-          style={{ borderTop: "1px solid rgba(240,237,232,0.06)" }}
-        >
-          {[
-            { number: "7+", label: "Years of experience" },
-            { number: "60+", label: "Projects delivered" },
-            { number: "98%", label: "Client satisfaction" },
-            { number: "12", label: "Awards & recognitions" },
-          ].map((s) => (
-            <div key={s.label} className="flex flex-col gap-1">
-              <span className="stat-number font-display">{s.number}</span>
-              <span className="text-sm font-medium" style={{ color: "#4A4745" }}>
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Scroll indicator */}

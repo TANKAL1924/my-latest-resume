@@ -4,7 +4,7 @@ import HeroSection from "./components/HeroSection";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutSection from "./pages/AboutSection";
-import ProcessSection from "./pages/ProcessSection";
+import ExperiencesSection from "./pages/ExperiencesSection";
 import ContactSection from "./pages/ContactSection";
 import { getPortfolioProfile } from "./lib/portfolio";
 
@@ -30,7 +30,7 @@ export default function App() {
         <div className="section-divider" />
         <AboutSection />
         <div className="section-divider" />
-        <ProcessSection />
+        <ExperiencesSection />
         <div className="section-divider" />
         <ContactSection />
       </main>

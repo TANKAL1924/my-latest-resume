@@ -2,15 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import AppLogo from "../components/ui/AppLogo";
+import { usePortfolioStore } from "../lib/store";
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Work", href: "#work" },
-  { label: "Process", href: "#process" },
+  { label: "Experiences", href: "#experiences" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Header() {
+  const fullname = usePortfolioStore((state) => state.profile?.fullname ?? "");
   const headerRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,7 +48,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
         {/* Logo */}
         <AppLogo
-          text="Marcus Chen"
+          text={fullname}
           size={32}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
@@ -60,17 +61,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-
-        {/* CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <a
-            href="mailto:hello@marcuschen.dev"
-            className="btn-primary"
-            style={{ padding: "0.6rem 1.5rem", fontSize: "0.8125rem" }}
-          >
-            Hire me
-          </a>
-        </div>
 
         {/* Mobile hamburger */}
         <button
