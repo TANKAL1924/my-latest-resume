@@ -135,11 +135,9 @@ export default function AboutSection() {
           {/* Left: Text + skills */}
           <div ref={leftRef} style={{ opacity: 0 }}>
             <h2 className="section-headline font-display mb-8" style={{ color: "#F0EDE8" }}>
-              Building at the <br />
               <span className="text-gradient-amber heading-underline">
-                intersection
+                {profile?.main_course ?? "intersection"}
               </span>
-              <br /> of design & code.
             </h2>
 
             <div className="space-y-5 mb-10" style={{ color: "#8A8580" }}>

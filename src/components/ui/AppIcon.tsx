@@ -1,5 +1,3 @@
-'use client';
-
 type IconVariant = 'outline' | 'solid';
 
 interface IconProps {

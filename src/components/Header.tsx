@@ -113,13 +113,6 @@ export default function Header() {
               {link?.label}
             </a>
           ))}
-          <a
-            href="mailto:hello@marcuschen.dev"
-            className="btn-primary inline-flex mt-4"
-            onClick={() => setMenuOpen(false)}
-          >
-            Hire me
-          </a>
         </div>
       </div>
     </header>

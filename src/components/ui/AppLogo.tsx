@@ -1,5 +1,3 @@
-'use client';
-
 import logoImg from '../../assets/logo.png';
 import AppImage from './AppImage';
 

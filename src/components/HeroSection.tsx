@@ -130,9 +130,9 @@ export default function HeroSection() {
   }, []);
 
   const headlineLines = [
-    { words: ["Crafting", "Digital"] },
-    { words: ["Experiences"] },
-    { words: ["That", "Matter."] },
+    { words: ["Building", "Scalable"] },
+    { words: ["Web", "Applications"] },
+    { words: ["That", "Perform."] },
   ];
 
   return (
@@ -221,9 +221,8 @@ export default function HeroSection() {
           className="max-w-xl text-lg leading-relaxed mb-10"
           style={{ color: "#8A8580", opacity: 0 }}
         >
-          Senior Frontend Engineer & Creative Developer. I build immersive,
-          high-performance web experiences for ambitious brands and startups —
-          from concept to pixel-perfect execution.
+          Mid-Level Full Stack Developer specializing in Vite, React, and Node.js. 
+          I design and build fast, maintainable applications from frontend interfaces to backend APIs.
         </p>
 
         {/* CTA */}
