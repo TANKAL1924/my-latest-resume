@@ -18,7 +18,7 @@ export default function HeroSection() {
   useEffect(() => {
     const { data } = supabase.storage
       .from("resume")
-      .getPublicUrl("Izzat Hafizuddin(Resume).pdf");
+      .getPublicUrl("Izzat Hafizuddin (Resume).pdf");
     if (data?.publicUrl) setResumeUrl(data.publicUrl);
   }, []);
 
