@@ -61,7 +61,7 @@ export default function ContactSection() {
                 <span className="text-gradient-amber">something great</span>
               </h2>
               <p className="text-base leading-relaxed mb-10" style={{ color: "#8A8580" }}>
-                I'm currently available for freelance projects and open to full-time founding-team roles. If you have an interesting challenge, let's talk.
+                I'm currently available for freelance projects and open to full-time. If you have an interesting challenge, let's talk.
               </p>
 
               {/* Contact info */}
