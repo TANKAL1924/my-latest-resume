@@ -47,7 +47,7 @@ export default function ContactSection() {
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
             <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#F5A623" }}>
-              03 — Contact
+              04 — Contact
             </span>
             <div className="flex-1 h-px" style={{ background: "rgba(240,237,232,0.06)" }} />
           </div>

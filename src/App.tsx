@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AboutSection from "./pages/AboutSection";
 import ExperiencesSection from "./pages/ExperiencesSection";
+import ReferencesSection from "./pages/ReferencesSection";
 import ContactSection from "./pages/ContactSection";
 import { getPortfolioProfile } from "./lib/portfolio";
 import LoadingScreen from "./components/LoadingScreen";
@@ -35,6 +36,8 @@ export default function App() {
         <AboutSection />
         <div className="section-divider" />
         <ExperiencesSection />
+        <div className="section-divider" />
+        <ReferencesSection />
         <div className="section-divider" />
         <ContactSection />
       </main>

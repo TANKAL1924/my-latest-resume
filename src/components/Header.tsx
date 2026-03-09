@@ -7,6 +7,7 @@ import { usePortfolioStore } from "../lib/store";
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Experiences", href: "#experiences" },
+  { label: "References", href: "#references" },
   { label: "Contact", href: "#contact" },
 ];
 
