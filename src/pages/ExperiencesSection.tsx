@@ -10,7 +10,7 @@ import { usePortfolioStore } from "../lib/store";
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return "Present";
   const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", { year: "numeric" });
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
 function isProjectEntry(
